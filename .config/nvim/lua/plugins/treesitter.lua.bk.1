@@ -1,0 +1,62 @@
+return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPre", "BufNewFile" },
+    build = ":TSUpdate",
+    dependencies = {
+      -- "nvim-treesitter/nvim-treesitter-textobjects",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
+    },
+    config = function()
+      local config = require("nvim-treesitter.configs")
+      config.setup({
+        auto_install = true,
+        highlight = { 
+          enable = true,
+          disable = { "css", "latex", "markdown", "cls" }, -- list of language that will be disabled
+        },
+        -- enable indentation        
+        indent = { enable = true },
+        -- enable autotagging (w/ nvim-ts-autotag plugin)
+        autotag = {
+          enable = false,
+        },
+         -- ensure these language parsers are installed
+        ensure_installed = {
+          "json",
+          "yaml",
+          "html",
+          "bash",
+          "lua",
+          "vim",
+          "gitignore",
+          "query",
+          "python",
+          "c",
+          "haskell",
+          "gitignore",
+          "bibtex",
+          "vimdoc",
+--          "norg",
+        },
+        ignore_install = { "latex" }, -- List of parsers to ignore installing
+        autopairs = {
+          enable = true,
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "<C-n>",
+            node_incremental = "<C-n>",
+            scope_incremental = false,
+            node_decremental = "<C-p>",
+          },
+        },
+      })
+
+    -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
+    require("ts_context_commentstring").setup({})
+  end,
+  }
+}

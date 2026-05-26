@@ -1,5 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
+  build = "make install_jsregexp",
   event = { "BufReadPre", "BufNewFile" },
   submodules = false,
   config = function()
